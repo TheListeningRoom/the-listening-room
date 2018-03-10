@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import * as firebase from 'firebase';
+import Messenger from './Messenger';
 
 class App extends Component {
 
@@ -106,12 +107,14 @@ class App extends Component {
             Your browser does not support the audio element.
           </audio>
 
+          <Messenger />
+
         </div>
       );
     } else {
       return (
         <div>
-          <h1>Loading...</h1>
+          <h1 align="center">Loading...</h1>
         </div>
       )
     }
