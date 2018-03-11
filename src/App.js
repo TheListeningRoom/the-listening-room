@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import * as firebase from 'firebase';
 import Messenger from './Messenger';
+// import Cover from './Cover';
 
 class App extends Component {
 
@@ -96,7 +97,7 @@ class App extends Component {
             <h1 className="App-title">The Listening Room</h1>
           </header>
 
-          <form onSubmit={this.handleSubmit}>
+          <form className="song-form" onSubmit={this.handleSubmit}>
             <input type="text" name="song" placeholder="Enter song" />
           </form>
 
