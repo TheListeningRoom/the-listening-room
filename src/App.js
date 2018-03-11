@@ -101,7 +101,7 @@ class App extends Component {
             ▶ ❚❚
           </button>
 
-          <h1>{this.state.song}</h1>
+          <p>{this.state.song}</p>
 
           <audio src={song} ref={this.audioDidMount} loop>
             Your browser does not support the audio element.
@@ -123,4 +123,3 @@ class App extends Component {
 
 export default App;
 
-// test
