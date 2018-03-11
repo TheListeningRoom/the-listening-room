@@ -11,7 +11,8 @@ class App extends Component {
     this.state = {
       song: ''
     }
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleUpload = this.handleUpload.bind(this)
     this.handlePlayPauseClick = this.handlePlayPauseClick.bind(this);
   }
 
@@ -74,14 +75,37 @@ class App extends Component {
     // })
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    const messageRef = firebase.database().ref('message');
-    messageRef.push({
-      song: event.target.song.value
-    }).key
-    event.target.song.value = '';
-  }
+  // handleSubmit(event) {
+  //   event.preventDefault();
+  //   const messageRef = firebase.database().ref('message');
+  //   messageRef.push({
+  //     song: event.target.song.value
+  //   }).key
+  //   event.target.song.value = '';
+  // }
+  
+  handleUpload(evt) {
+    let file = evt.target.files[0]
+    console.log(file.name)
+
+    let musicRef = firebase.storage().ref('music/' + file.name)
+    
+    musicRef.put(file)
+    .then(() => {
+      console.log('i hit this part 1')
+      const storageRef = firebase.storage().ref('/music')
+      storageRef.child(file.name).getMetadata()
+    .then(metaData => {
+      console.log(metaData)
+      let url = metaData.downloadURLs[0]
+      console.log(url)
+      const messageRef = firebase.database().ref('message');
+      messageRef.push({
+        song: url
+      })
+    })
+  })
+}
 
 
   render() {
@@ -91,7 +115,6 @@ class App extends Component {
     if (this.state.song) {
       return (
         <div className="App">
-
           <header className="App-header">
             <h1 className="App-title">The Listening Room</h1>
           </header>
@@ -99,7 +122,8 @@ class App extends Component {
           <form onSubmit={this.handleSubmit}>
             <input type="text" name="song" placeholder="Enter song" />
           </form>
-
+          
+          <input onChange={this.handleUpload} name="song" type="file" />
           <button id="play" onClick={this.handlePlayPauseClick}>
             ▶ ❚❚
           </button>
