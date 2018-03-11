@@ -32,19 +32,22 @@ export default class Messenger extends Component {
 
         const timestamp = snap.val().createdAt;
         const timestampDiv = document.createElement('div');
-        timestampDiv.className = 'timestamp';
+        timestampDiv.className = 'message-item';
+        timestampDiv.id = 'timestamp';
         timestampDiv.innerHTML = timestamp;
         newMessageDiv.appendChild(timestampDiv);
 
         const userName = `${snap.val().userName}: `;
         const userNameDiv = document.createElement('div');
-        userNameDiv.className = 'user-name';
+        userNameDiv.className = 'message-item';
+        userNameDiv.id = 'user-name';
         userNameDiv.innerHTML = userName;
         newMessageDiv.appendChild(userNameDiv);
 
         const userMessage = snap.val().userMessage;
         const userMessageDiv = document.createElement('div');
-        userMessageDiv.className = 'user-message';
+        userMessageDiv.className = 'message-item';
+        userMessageDiv.id = 'user-message';
         userMessageDiv.innerHTML = userMessage;
         newMessageDiv.appendChild(userMessageDiv);
 
