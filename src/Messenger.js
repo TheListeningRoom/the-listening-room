@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
-import './App.css';
+import './index.css';
 import * as firebase from 'firebase';
 
 export default class Messenger extends Component {
@@ -11,15 +11,46 @@ export default class Messenger extends Component {
     }
 
     componentDidMount() {
-        const messaages = firebase.database().ref('chat')
-        messaages.on('child_added', snap => {
-            const message = `${snap.val().createdAt}\u00A0\u00A0\u00A0\u00A0 ${snap.val().text}`;
-            const chatText = document.createElement('div');
-            const chatBoxDiv = document.getElementById('chatbox');
-            const firstChild = chatBoxDiv.firstChild;
-            chatBoxDiv.insertBefore(chatText, firstChild).innerHTML = message
+        const messages = firebase.database().ref('chat')
+        messages.on('child_added', snap => {
+            this.displayMessage(snap);
+            // const message = `${snap.val().createdAt}\u00A0\u00A0\u00A0\u00A0 ${snap.val().text}`;
+            // const chatText = document.createElement('div');
+            // chatText.className = 'single-message'
+            // // const chatBoxDiv = document.getElementById('chatbox');
+            // const firstChild = chatBoxDiv.firstChild;
+            // chatBoxDiv.insertBefore(chatText, firstChild).innerHTML = message
         })
     }
+
+    displayMessage = snap => {
+        const chatBoxDiv = document.getElementById('chatbox');
+        const firstChild = chatBoxDiv.firstChild;
+
+        const newMessageDiv = document.createElement('div');
+        newMessageDiv.className = 'single-message';
+
+        const timestamp = snap.val().createdAt;
+        const timestampDiv = document.createElement('div');
+        timestampDiv.className = 'timestamp';
+        timestampDiv.innerHTML = timestamp;
+        newMessageDiv.appendChild(timestampDiv);
+
+        const userName = `${snap.val().userName}: `;
+        const userNameDiv = document.createElement('div');
+        userNameDiv.className = 'user-name';
+        userNameDiv.innerHTML = userName;
+        newMessageDiv.appendChild(userNameDiv);
+
+        const userMessage = snap.val().userMessage;
+        const userMessageDiv = document.createElement('div');
+        userMessageDiv.className = 'user-message';
+        userMessageDiv.innerHTML = userMessage;
+        newMessageDiv.appendChild(userMessageDiv);
+
+        chatBoxDiv.insertBefore(newMessageDiv, firstChild)
+    }
+
 
     // loadMessages = () => {
     //     // Remove all previous listeners:
@@ -53,7 +84,8 @@ export default class Messenger extends Component {
         if (event.target.text.value) {
             firebase.database().ref('chat').push({
                 createdAt: new Date().toString().slice(0, 24),
-                text: event.target.text.value
+                userName: event.target.name.value,
+                userMessage: event.target.text.value
             })
             .catch( error => console.error('Error writing to Firebase DB', error));
             event.target.text.value = '';
@@ -67,18 +99,23 @@ export default class Messenger extends Component {
                 <form className="input" onSubmit={this.handleSubmitMessage} >
                     <input
                         type="text"
+                        name="name"
+                        placeholder="Enter your name"
+                    />
+                    <input
+                        type="text"
                         id="message"
                         name="text"
                         placeholder="Send a message"
                     />
                     <input
                         type="submit"
-                        value="submit"
+                        value="send"
                     />
                 </form>
 
                 <div className="historical-messages">
-                    <ul id="chatbox" />
+                    <div id="chatbox" />
                 </div>
 
             </div>

@@ -4,3 +4,12 @@ body {
   font-family: sans-serif;
   background: rgb(255, 255, 255);
 }
+
+/* .input {width: 100px; height: 20px; padding: 1px} */
+
+.single-message {
+  display: flex;
+  justify-content: flex-start;
+  padding: 5px;
+
+}
