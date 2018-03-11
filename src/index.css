@@ -5,11 +5,30 @@ body {
   background: rgb(255, 255, 255);
 }
 
-/* .input {width: 100px; height: 20px; padding: 1px} */
-
 .single-message {
   display: flex;
   justify-content: flex-start;
+  align-content: space-between;
   padding: 5px;
-
 }
+
+.message-item {
+  display: flex;
+  padding: 0 7px 0 7px;
+}
+
+/* #timestamp {
+
+} */
+
+#user-name {
+  font-weight: 600;
+}
+
+/* Not working: */
+/* #user-message {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: flex-start;
+} */

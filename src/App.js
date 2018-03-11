@@ -90,7 +90,7 @@ class App extends Component {
 
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">Symbal Player</h1>
+            <h1 className="App-title">The Listening Room</h1>
           </header>
 
           <form onSubmit={this.handleSubmit}>
@@ -122,3 +122,5 @@ class App extends Component {
 }
 
 export default App;
+
+// test
