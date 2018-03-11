@@ -11,7 +11,8 @@ class App extends Component {
     this.state = {
       song: ''
     }
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleUpload = this.handleUpload.bind(this)
     this.handlePlayPauseClick = this.handlePlayPauseClick.bind(this);
   }
 
@@ -70,31 +71,37 @@ class App extends Component {
     // })
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    const messageRef = firebase.database().ref('message');
-    messageRef.push({
-      song: event.target.song.value
-    }).key
-    event.target.song.value = '';
-  }
+  // handleSubmit(event) {
+  //   event.preventDefault();
+  //   const messageRef = firebase.database().ref('message');
+  //   messageRef.push({
+  //     song: event.target.song.value
+  //   }).key
+  //   event.target.song.value = '';
+  // }
   
   handleUpload(evt) {
     let file = evt.target.files[0]
     console.log(file.name)
 
     let musicRef = firebase.storage().ref('music/' + file.name)
-    console.log(musicRef)
-    musicRef.put(file)
-
-    const storageRef = firebase.storage().ref('/music')
-    storageRef.child(file.name).getMetadata()
-    .then(metaData => {
-      let url = metaData.downloadURLs[0]
-      
-    })
     
-  }
+    musicRef.put(file)
+    .then(() => {
+      console.log('i hit this part 1')
+      const storageRef = firebase.storage().ref('/music')
+      storageRef.child(file.name).getMetadata()
+    .then(metaData => {
+      console.log(metaData)
+      let url = metaData.downloadURLs[0]
+      console.log(url)
+      const messageRef = firebase.database().ref('message');
+      messageRef.push({
+        song: url
+      })
+    })
+  })
+}
 
 
   render() {
