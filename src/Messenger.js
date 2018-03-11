@@ -14,12 +14,6 @@ export default class Messenger extends Component {
         const messages = firebase.database().ref('chat')
         messages.on('child_added', snap => {
             this.displayMessage(snap);
-            // const message = `${snap.val().createdAt}\u00A0\u00A0\u00A0\u00A0 ${snap.val().text}`;
-            // const chatText = document.createElement('div');
-            // chatText.className = 'single-message'
-            // // const chatBoxDiv = document.getElementById('chatbox');
-            // const firstChild = chatBoxDiv.firstChild;
-            // chatBoxDiv.insertBefore(chatText, firstChild).innerHTML = message
         })
     }
 
