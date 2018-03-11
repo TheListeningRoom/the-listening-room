@@ -5,6 +5,12 @@ body {
   background: rgb(255, 255, 255);
 }
 
+p {
+  display: flex;
+  padding: 0 15px 0 15px;
+  max-width: 90vw;
+}
+
 .single-message {
   display: flex;
   justify-content: flex-start;
@@ -15,20 +21,22 @@ body {
 .message-item {
   display: flex;
   padding: 0 7px 0 7px;
+  font-family: 'PT Sans', sans-serif;
 }
 
-/* #timestamp {
-
-} */
+#timestamp {
+  width: 20vw;
+}
 
 #user-name {
-  font-weight: 600;
+  font-weight: 700;
+  width: 10vw;
+  text-align: left;
 }
 
-/* Not working: */
-/* #user-message {
+#user-message {
   display: flex;
   flex-wrap: wrap;
-  align-content: flex-start;
-  justify-content: flex-start;
-} */
+  width: 50vw;
+  text-align: left;
+}
