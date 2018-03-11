@@ -78,6 +78,23 @@ class App extends Component {
     }).key
     event.target.song.value = '';
   }
+  
+  handleUpload(evt) {
+    let file = evt.target.files[0]
+    console.log(file.name)
+
+    let musicRef = firebase.storage().ref('music/' + file.name)
+    console.log(musicRef)
+    musicRef.put(file)
+
+    const storageRef = firebase.storage().ref('/music')
+    storageRef.child(file.name).getMetadata()
+    .then(metaData => {
+      let url = metaData.downloadURLs[0]
+      
+    })
+    
+  }
 
 
   render() {
@@ -87,7 +104,6 @@ class App extends Component {
     if (this.state.song) {
       return (
         <div className="App">
-
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
             <h1 className="App-title">The Listening Room</h1>
@@ -96,7 +112,8 @@ class App extends Component {
           <form onSubmit={this.handleSubmit}>
             <input type="text" name="song" placeholder="Enter song" />
           </form>
-
+          
+          <input onChange={this.handleUpload} name="song" type="file" />
           <button id="play" onClick={this.handlePlayPauseClick}>
             ▶ ❚❚
           </button>
