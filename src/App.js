@@ -30,6 +30,9 @@ class App extends Component {
   }
 
   setAudioState = () => {
+    console.log('******** In setAudioState *********')
+    console.log('this.paused -->', this.paused)
+    console.log('this.audio -->', this.audio)
     if (this.paused) {
       this.audio.pause();
     } else {
@@ -38,6 +41,7 @@ class App extends Component {
   }
 
   audioDidMount = audio => {
+    console.log('******** In audioDidMount *********')
     console.log('audioDidMount audio -->', audio)
     this.audio = audio;
     this.audio.addEventListener('loadeddata', this.setAudioState)
@@ -89,7 +93,6 @@ class App extends Component {
         <div className="App">
 
           <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
             <h1 className="App-title">The Listening Room</h1>
           </header>
 
@@ -103,9 +106,7 @@ class App extends Component {
 
           <p>{this.state.song}</p>
 
-          <audio src={song} ref={this.audioDidMount} loop>
-            Your browser does not support the audio element.
-          </audio>
+          <audio src={song} ref={this.audioDidMount} loop />
 
           <Messenger />
 
@@ -123,3 +124,7 @@ class App extends Component {
 
 export default App;
 
+// <header className="App-header">
+//   <img src={logo} className="App-logo" alt="logo" />
+//   <h1 className="App-title">The Listening Room</h1>
+// </header>
