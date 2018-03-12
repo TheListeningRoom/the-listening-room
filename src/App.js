@@ -9,7 +9,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      song: ''
+      song: '',
+      songName: ''
     }
     // this.handleSubmit = this.handleSubmit.bind(this);
     this.handleUpload = this.handleUpload.bind(this)
@@ -19,9 +20,11 @@ class App extends Component {
   componentDidMount() {
     console.log('in componenet did mount')
     const messageRef = firebase.database().ref('message');
+
     messageRef.on('child_added', snap => {
       this.setState({
-        song: snap.val().song
+        song: snap.val().song,
+        songName: snap.val().songName
       });
     })
     firebase.database().ref('paused').on('value', snap => {
@@ -86,8 +89,8 @@ class App extends Component {
   
   handleUpload(evt) {
     let file = evt.target.files[0]
-    console.log(file.name)
-
+    console.log(evt.target.files)
+  
     let musicRef = firebase.storage().ref('music/' + file.name)
     
     musicRef.put(file)
@@ -101,7 +104,8 @@ class App extends Component {
       console.log(url)
       const messageRef = firebase.database().ref('message');
       messageRef.push({
-        song: url
+        song: url,
+        songName: file.name
       })
     })
   })
@@ -111,6 +115,10 @@ class App extends Component {
   render() {
 
     const song = this.state.song;
+    let songName;
+    if (this.state.songName) {
+      songName = this.state.songName.slice(0, -4)
+    }
 
     if (this.state.song) {
       return (
@@ -119,16 +127,13 @@ class App extends Component {
             <h1 className="App-title">The Listening Room</h1>
           </header>
 
-          <form onSubmit={this.handleSubmit}>
-            <input type="text" name="song" placeholder="Enter song" />
-          </form>
-          
-          <input onChange={this.handleUpload} name="song" type="file" />
+          <h1>Upload an MP3 below!</h1>
+          <input onChange={this.handleUpload} name="song" type="file" placeholder="Choose an mp3"/>
           <button id="play" onClick={this.handlePlayPauseClick}>
             ▶ ❚❚
           </button>
 
-          <p>{this.state.song}</p>
+          <p>Now playing {songName}</p>
 
           <audio src={song} ref={this.audioDidMount} loop />
 
