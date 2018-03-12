@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import * as firebase from 'firebase';
 import Messenger from './Messenger';
+// import Cover from './Cover';
 
 class App extends Component {
 
@@ -129,6 +130,7 @@ class App extends Component {
 
           <h1>Upload an MP3 below!</h1>
           <input onChange={this.handleUpload} name="song" type="file" placeholder="Choose an mp3"/>
+          
           <button id="play" onClick={this.handlePlayPauseClick}>
             ▶ ❚❚
           </button>
