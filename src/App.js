@@ -84,13 +84,13 @@ class App extends Component {
   //   }).key
   //   event.target.song.value = '';
   // }
-  
+
   handleUpload(evt) {
     let file = evt.target.files[0]
     console.log(file.name)
 
     let musicRef = firebase.storage().ref('music/' + file.name)
-    
+
     musicRef.put(file)
     .then(() => {
       console.log('i hit this part 1')
@@ -120,11 +120,10 @@ class App extends Component {
             <h1 className="App-title">The Listening Room</h1>
           </header>
 
-          <form className="song-form" onSubmit={this.handleSubmit}>
-            <input type="text" name="song" placeholder="Enter song" />
-          </form>
-          
-          <input onChange={this.handleUpload} name="song" type="file" />
+          <div className="file-upload">
+            <input onChange={this.handleUpload} name="song" type="file" />
+          </div>
+
           <button id="play" onClick={this.handlePlayPauseClick}>
             ▶ ❚❚
           </button>

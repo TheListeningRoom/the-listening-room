@@ -14,6 +14,38 @@ p {
   overflow: hidden;
 }
 
+/* .chatroom {
+  align: center;
+} */
+
+/* Upload Song */
+
+.file-upload {
+  display: flex;
+  margin: 3px 25px 3px 5px;
+  width: 98vw;
+  border-radius: 2px;
+  justify-content: center;
+}
+/* Messenger Form */
+
+form {
+  display: flex;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+  margin: 3px 5px 3px 5px;
+  width: 98vw;
+  border: 1px solid #222;
+  border-radius: 4px;
+  justify-content: center;
+}
+
+/* .user-name-form {
+  align-content: flex-start;
+} */
+
+/* Historical Messages (aka Chatbox) */
+
 #chatbox {
   display: flex;
   flex-direction: column;
@@ -52,15 +84,3 @@ p {
   text-align: left;
 }
 
-form {
-  display: flex;
-  margin: 3px 5px 3px 5px;
-  width: 98vw;
-  border: 1px solid #222;
-  border-radius: 2px;
-  justify-content: center;
-}
-
-.song-form {
-  width: 100vw;
-}

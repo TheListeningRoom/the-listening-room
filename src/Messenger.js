@@ -97,12 +97,17 @@ export default class Messenger extends Component {
                     <input
                         type="text"
                         name="name"
+                        className="user-name-form"
+                        maxLength="20"
                         placeholder="Enter your name"
+                        required
                     />
-                    <input
+                    <textarea
                         type="text"
                         id="message"
                         name="text"
+                        className="user-message-form"
+                        size="50"
                         placeholder="Send a message"
                     />
                     <input
