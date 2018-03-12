@@ -91,7 +91,7 @@ class App extends Component {
   handleUpload(evt) {
     let file = evt.target.files[0]
     console.log(evt.target.files)
-  
+
     let musicRef = firebase.storage().ref('music/' + file.name)
 
     musicRef.put(file)
@@ -128,16 +128,24 @@ class App extends Component {
             <h1 className="App-title">The Listening Room</h1>
           </header>
 
+          <h2>Upload an MP3 below!</h2>
+
           <div className="file-upload">
-            <h1>Upload an MP3 below!</h1>
-            <input onChange={this.handleUpload} name="song" type="file" placeholder="Choose an mp3"/>
+            <input
+              onChange={this.handleUpload}
+              name="song"
+              type="file"
+              placeholder="Choose an mp3"
+            />
           </div>
-        
+
+          <p>Now playing: {songName}</p>
+
           <button id="play" onClick={this.handlePlayPauseClick}>
             ▶ ❚❚
           </button>
 
-          <p>Now playing {songName}</p>
+
 
           <audio src={song} ref={this.audioDidMount} loop />
 
