@@ -31,7 +31,7 @@ export default class Messenger extends Component {
         timestampDiv.innerHTML = timestamp;
         newMessageDiv.appendChild(timestampDiv);
 
-        const userName = `${snap.val().userName}: `;
+        const userName = snap.val().userName;
         const userNameDiv = document.createElement('div');
         userNameDiv.className = 'message-item';
         userNameDiv.id = 'user-name';
@@ -84,7 +84,7 @@ export default class Messenger extends Component {
                 userName: event.target.name.value,
                 userMessage: event.target.text.value
             })
-            .catch( error => console.error('Error writing to Firebase DB', error));
+                .catch(error => console.error('Error writing to Firebase DB', error));
             event.target.text.value = '';
         }
     }
@@ -94,25 +94,46 @@ export default class Messenger extends Component {
             <div id="chatroom">
 
                 <form className="input" onSubmit={this.handleSubmitMessage} >
-                    <input
-                        type="text"
-                        name="name"
-                        className="user-name-form"
-                        maxLength="20"
-                        placeholder="Enter your name"
-                        required
-                    />
-                    <textarea
-                        type="text"
-                        id="message"
-                        name="text"
-                        className="user-message-form"
-                        size="50"
-                        placeholder="Send a message"
-                    />
+
+                    <div className="form-input-container">
+                        <div>
+                            <label for="user-name-form">
+                                Display Name
+                            </label>
+                        </div>
+                        <div>
+                            <input
+                                type="text"
+                                name="name"
+                                className="user-name-form"
+                                maxLength="20"
+                                placeholder="Noelle / Luis"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div className="form-input-container">
+                        <div>
+                            <label for="user-message-form">
+                                Penny for your thoughts
+                            </label>
+                        </div>
+                        <div>
+                            <input
+                                type="text"
+                                id="message"
+                                name="text"
+                                className="user-message-form"
+                                size="50"
+                                placeholder="Send a message"
+                            />
+                        </div>
+                    </div>
+
                     <input
                         type="submit"
-                        value="send"
+                        value="Send"
                     />
                 </form>
 
@@ -125,3 +146,12 @@ export default class Messenger extends Component {
     }
 
 }
+
+// <textarea
+// type="text"
+// id="message"
+// name="text"
+// className="user-message-form"
+// size="50"
+// placeholder="Send a message"
+// />
