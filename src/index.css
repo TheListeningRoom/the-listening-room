@@ -85,6 +85,7 @@ form {
 #timestamp {
   width: 16vw;
   font-size: 0.5rem;
+  align-self: center;
 }
 
 #user-name {
@@ -98,4 +99,3 @@ form {
   width: 72vw;
   text-align: left;
 }
-
